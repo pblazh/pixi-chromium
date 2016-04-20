@@ -1,0 +1,23 @@
+node_modules
+
+### Bower ###
+src/bower_components
+
+
+### Linux ###
+.*
+!.gitignore
+!.git*
+!.bowerrc
+!.jshintrc
+!.npmignore
+*~
+*.swp
+
+### SASS ###
+*.sass-cache
+*.map
+
+dst
+app/css/*.css
+sources

@@ -1,0 +1,10 @@
+{
+  "name": "pixi-chromium",
+  "version": "0.0.0",
+  "dependencies": {
+    "requirejs": "^2.2.0",
+    "almond": "^0.3.2",
+    "js-signals": "^1.0.0"
+  },
+  "devDependencies": {}
+}
