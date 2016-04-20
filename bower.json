@@ -4,7 +4,8 @@
   "dependencies": {
     "requirejs": "^2.2.0",
     "almond": "^0.3.2",
-    "js-signals": "^1.0.0"
+    "js-signals": "^1.0.0",
+    "pixi.js": "pixi#^3.0.11"
   },
   "devDependencies": {}
 }
