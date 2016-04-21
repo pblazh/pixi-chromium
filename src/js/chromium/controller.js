@@ -1,38 +1,22 @@
 define(
-    ['./constants', './store/gamestore', './store/history', './store/actions', './utils/keylistener'],
-    function(constants, store, history,  actions, keylistener){
+    ['signals', './constants', '../utils/keylistener'],
+    function(signals, constants, keylistener){
     'use strict';
 
-    // the main game controller. It set the key listener and dispatch
-    // corrsponding actions on the store.
     function Controller(){
+        this.dirty = true;
         this.isRunning = false;
+        this.keys = {};
+        this.updated = new signals.Signal();
     }
 
-    Controller.prototype.onKey= function(key){
-        switch( key ){
-        case constants.KEY_LEFT:
-            store.dispatch(actions.moveLeft());
-            break;
-        case constants.KEY_RIGHT:
-            store.dispatch(actions.moveRight());
-            break;
-        case constants.KEY_ROTATE:
-            store.dispatch(actions.rotateLeft());
-            break;
-        case constants.KEY_DROP:
-            store.dispatch(actions.dropDown());
-            break;
-        case constants.KEY_BACK:
-            let prevState = history.pop();
-            if(prevState && prevState.page === constants.PAGE_GAME){
-                store.dispatch(actions.pushBack(prevState));
-            }
-            break;
-        case constants.KEY_MAGIC:
-            store.dispatch(actions.magic());
-            break;
-        }
+    Controller.prototype.onKeyDown= function(key){
+        this.dirty = true;
+        this.keys[key] = true;
+    };
+    Controller.prototype.onKeyUp= function(key){
+        this.dirty = true;
+        this.keys[key] = false;
     };
 
     Controller.prototype.stop = function(){
@@ -42,18 +26,22 @@ define(
     };
 
     Controller.prototype.update = function(){
+        if(this.dirty){
+            this.updated.dispatch(this.keys);
+        }
+        this.dirty = false;
         clearInterval(this.interval);
-        store.dispatch(actions.moveDown());
         if(this.isRunning){
-            this.interval = setTimeout( this.update.bind(this), store.getState().speed * 1000);
+            this.interval = setTimeout( this.update.bind(this), 100);
         }
     };
 
     Controller.prototype.start = function(){
-        this.kListener = keylistener(store);
-        this.kListener.keydown.add(this.onKey);
+        this.kListener = keylistener();
+        this.kListener.keydown.add(this.onKeyDown.bind(this));
+        this.kListener.keyup.add(this.onKeyUp.bind(this));
         this.isRunning = true;
-        this.interval = setTimeout( this.update.bind(this), store.getState().speed * 1000);
+        this.interval = setTimeout( this.update.bind(this), 100);
     };
 
     return Controller;

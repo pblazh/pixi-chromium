@@ -1,4 +1,4 @@
-define(['pixi', 'signals', '../constants'], function(PX, signals, constants){
+define(['signals', 'constants'], function(signals, constants){
     'use strict';
 
     // listen key for the keyevent and convert them into game specific events
@@ -6,42 +6,49 @@ define(['pixi', 'signals', '../constants'], function(PX, signals, constants){
           KEYCODE_RIGHT = 39,
           KEYCODE_UP = 38,
           KEYCODE_DOWN = 40,
-          KEYCODE_M = 77,
           KEYCODE_SPACE = 32;
 
+    const LOOKUP = {
+        [KEYCODE_LEFT]: constants.KEY_LEFT,
+        [KEYCODE_RIGHT]: constants.KEY_RIGHT,
+        [KEYCODE_UP]: constants.KEY_ACCELERATE,
+        [KEYCODE_DOWN]: constants.KEY_BREAK,
+        [KEYCODE_SPACE]: constants.KEY_FIRE,
+    }
 
     let onKeyDown = (listener) =>
         (ev) => {
-            switch(ev.keyCode){
-            case KEYCODE_LEFT:
-                listener.keydown.dispatch(constants.KEY_LEFT);
-                break;
-            case KEYCODE_RIGHT:
-                listener.keydown.dispatch(constants.KEY_RIGHT);
-                break;
-            case KEYCODE_UP:
-                listener.keydown.dispatch(constants.KEY_BACK);
-                break;
-            case KEYCODE_DOWN:
-                listener.keydown.dispatch(constants.KEY_ROTATE);
-                break;
-            case KEYCODE_SPACE:
-                listener.keydown.dispatch(constants.KEY_DROP);
-            case KEYCODE_M:
-                listener.keydown.dispatch(constants.KEY_MAGIC);
-                break;
-            };
+            if(LOOKUP[ev.keyCode]){
+                listener.keydown.dispatch(LOOKUP[ev.keyCode]);
+            }
+        }
+
+    let onKeyUp = (listener) =>
+        (ev) => {
+            if(LOOKUP[ev.keyCode]){
+                listener.keyup.dispatch(LOOKUP[ev.keyCode]);
+            }
         }
 
     function KeyListener(){
         this.keydown = new signals.Signal();
+        this.keyup = new signals.Signal();
     }
 
     return function(){
         let kl = new KeyListener();
-        let listener = onKeyDown(kl);
-        window.addEventListener('keydown', listener);
-        kl.destroy = () => window.removeEventListener('keydown', listener);
+
+        let downListener = onKeyDown(kl);
+        let upListener = onKeyUp(kl);
+
+        window.addEventListener('keydown', downListener);
+        window.addEventListener('keyup', upListener);
+
+        kl.destroy = () => {
+            window.removeEventListener('keydown', downListener);
+            window.removeEventListener('keyup', upListener);
+        };
+
         return kl;
     };
 

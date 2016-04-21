@@ -1,9 +1,10 @@
 define(
-    ['pixi', 'constants', './views/main'],
-    function(PX, constants, MainView){
+    ['pixi', 'constants', './controller', './views/main'],
+    function(PX, constants, Controller, MainView){
     'use strict';
 
     let App = {
+        time: 0,
         stage: null,
         init: function(node){
             this.stage = new MainView();
@@ -12,10 +13,16 @@ define(
             node.appendChild(this.renderer.view);
 
             this.ticker = PX.ticker.shared;
-            this.ticker.autoStart = !false;
-            this.ticker.add((time) => this.renderer.render(this.stage));
+            this.ticker.autoStart = true;
+            this.ticker.add(this.update.bind(this));
+
+            this.controller = new Controller();
+            this.controller.start();
+            this.controller.updated.add(this.stage.change.bind(this.stage));
         },
-        update: function(){
+        update: function(time){
+            this.time += time;
+            this.stage.update(this.time);
             this.renderer.render(this.stage);
         },
     };
