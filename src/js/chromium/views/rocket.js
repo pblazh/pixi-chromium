@@ -26,7 +26,6 @@ define(
 
     function RocketView(){
         PX.Container.call(this);
-        this.speedX = 0;
 
         const DX = 70;
         this.body = new BodyView();
@@ -47,16 +46,13 @@ define(
 
     RocketView = tools.extend(RocketView, PX.Container);
 
-    RocketView.prototype.update = function(keys){
-        if(keys[constants.KEY_LEFT]){
+    RocketView.prototype.tilt = function(angle){
+        if(angle < 0){
             this.body.gotoAndStop(0);
-            this.speedX = -1;
-        }else if(keys[constants.KEY_RIGHT]){
+        }else if(angle > 0){
             this.body.gotoAndStop(2);
-            this.speedX = 1;
         }else{
             this.body.gotoAndStop(1);
-            this.speedX = 0;
         }
     }
 
