@@ -6,6 +6,10 @@ define(
     function BodyView(){
         PX.extras.MovieClip.call(this, [0, 1, 2].map(function(n){return PIXI.Texture.fromFrame('rocket_0' + n + '.png')}));
         this.animationSpeed = 0.25;
+
+        this.blur = new PIXI.filters.BlurFilter();
+        this.blur.blurX = 0;
+        this.filters = [this.blur];
     }
     BodyView = tools.extend(BodyView, PX.extras.MovieClip);
 
@@ -26,16 +30,22 @@ define(
 
     function RocketView(){
         PX.Container.call(this);
+        this.speed = 0;
+        this.acceleration = 0;
 
         const DX = 70;
         this.body = new BodyView();
         this.body.x = -DX;
+
+        this.bluredBody = new BodyView();
+        this.bluredBody.x = -DX;
 
         let fireView = new FireView();
         fireView.x = 55 - DX;
         fireView.y = 135;
         this.addChild(fireView);
 
+        this.addChild(this.bluredBody);
         this.addChild(this.body);
 
         let tieView = new TieView();
@@ -46,14 +56,15 @@ define(
 
     RocketView = tools.extend(RocketView, PX.Container);
 
-    RocketView.prototype.tilt = function(angle){
-        if(angle < 0){
-            this.body.gotoAndStop(0);
-        }else if(angle > 0){
-            this.body.gotoAndStop(2);
-        }else{
-            this.body.gotoAndStop(1);
-        }
+    RocketView.prototype.update = function(angle){
+        this.speed *= 0.9;
+        this.acceleration *= 0.99;
+        this.speed += this.acceleration;
+        this.speed = Math.max(-1, Math.min(1, this.speed));
+
+        this.body.gotoAndStop(this.speed > 0.1 ? 2 : (this.speed < -0.1 ? 0 : 1));
+        this.bluredBody.blur.blurX = this.speed * 150;
+        this.bluredBody.x = this.body.x - this.speed * 10;
     }
 
     return RocketView;

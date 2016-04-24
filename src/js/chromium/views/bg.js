@@ -17,7 +17,7 @@ define(
 
     function BgView(){
         PX.Container.call(this);
-        this.addChild(new PX.Sprite(PIXI.Texture.fromFrame('bg.png')));
+        this.addChild(new PX.Sprite(PIXI.Texture.fromFrame('bg_0.png')));
 
         this.planets = [];
         for(let i = 0; i< 5; i++){
@@ -25,6 +25,13 @@ define(
             this.planets.push(planet);
             this.addChild(planet);
         }
+
+        let bg1 = new PX.Sprite(PIXI.Texture.fromFrame('bg_1.png'));
+        bg1.y = constants.GAME_HEIGHT - bg1.height;
+        this.addChild(bg1);
+
+        let bg2 = new PX.Sprite(PIXI.Texture.fromFrame('bg_2.png'));
+        this.addChild(bg2);
 
     }
     BgView = tools.extend(BgView, PX.Container);
