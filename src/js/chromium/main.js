@@ -1,13 +1,13 @@
 define(
-    ['pixi', 'constants', './controller', './views/main'],
-    function(PX, constants, Controller, MainView){
+    ['pixi', 'constants', './controller', './game', './views/gamefield'],
+    function(PX, constants, Controller, Game, Gamefield){
     'use strict';
 
     let App = {
         time: 0,
         stage: null,
         init: function(node){
-            this.stage = new MainView();
+            this.stage = new Gamefield();
             this.renderer = new PX.autoDetectRenderer(constants.GAME_WIDTH,
                                                    constants.GAME_HEIGHT);
             node.appendChild(this.renderer.view);
@@ -16,13 +16,17 @@ define(
             this.ticker.autoStart = true;
             this.ticker.add(this.update.bind(this));
 
-            this.controller = new Controller();
-            this.controller.start();
-            this.controller.updated.add(this.stage.change.bind(this.stage));
+
+            this.game = new Game(this.stage);
+
+            let controller = new Controller();
+            controller.start();
+            controller.updated.add(this.game.change.bind(this.game));
         },
         update: function(time){
             this.time += time;
-            this.stage.update(this.time);
+            this.game.update(this.time);
+
             this.renderer.render(this.stage);
         },
     };
