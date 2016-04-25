@@ -6,7 +6,13 @@ define(
     function ScoreView(score){
         PX.Container.call(this);
 
-        let text = new PIXI.Text('' + score, {font : '48px Arial Black', fill : 0xff0000, align : 'center'});
+        let text = new PIXI.Text('' + score, {
+            font : '56px Serif',
+            fill : 0xff7e00,
+            align : 'center',
+            stroke : '0x000000',
+            strokeThickness : 10,
+        });
         this.addChild(text);
 
         this.pivot.x = this.width/2;

@@ -59,14 +59,14 @@ define(
 
         this.fireView = new FireView();
         this.fireView.x = 50 - DX;
-        this.fireView.y = 130;
+        this.fireView.y = 135;
         this.addChild(this.fireView);
 
         this.addChild(this.body);
 
         this.tieView = new TieView();
-        this.tieView.x = 24 - DX;
-        this.tieView.y = 90;
+        this.tieView.x = 26 - DX;
+        this.tieView.y = 86;
         this.addChild(this.tieView);
     }
 
