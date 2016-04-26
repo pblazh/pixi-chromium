@@ -13,13 +13,13 @@ define(
             node.appendChild(this.renderer.view);
 
             this.ticker = PX.ticker.shared;
-            this.ticker.autoStart = true;
             this.ticker.add(this.update.bind(this));
 
+            let controller = new Controller();
 
             this.game = new Game(this.stage);
+            this.game.complete.add(()=> controller.stop());
 
-            let controller = new Controller();
             controller.start();
             controller.updated.add(this.game.change.bind(this.game));
         },

@@ -1,5 +1,5 @@
 define(
-    ['signals', './constants', '../utils/keylistener'],
+    ['signals', 'constants', '../utils/keylistener'],
     function(signals, constants, keylistener){
     'use strict';
 

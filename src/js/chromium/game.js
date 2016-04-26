@@ -1,7 +1,8 @@
-define(['constants'], function(constants){
+define(['signals', 'constants'], function(signals, constants){
     'use strict';
 
     function Game(view){
+        this.isRunning = true;
         this.score = 0;
         this.view = view;
 
@@ -10,9 +11,8 @@ define(['constants'], function(constants){
         this.ufos = [];
         this.bombs = [];
 
-        this.addUfo();
-
-        this.isRunning = true;
+        addUfo(this);
+        this.complete = new signals.Signal();
     }
 
     Game.prototype.update = function(position){
@@ -24,13 +24,13 @@ define(['constants'], function(constants){
         this.rocket.move(position);
         keepInside(this.rocket);
 
-        this.bullets.forEach((bullet, i) => {
+        this.bullets.forEach((bullet) => {
             bullet.move(position);
 
             if(isOutside(bullet)){
                 removeBullet(this, bullet);
             }else{
-                checkBullet(this, bullet);
+                checkIfBulletHit(this, bullet);
             }
         });
 
@@ -39,9 +39,9 @@ define(['constants'], function(constants){
             keepInside(ufo);
 
             if(Math.random() > 0.995){
-                this.addBomb(ufo);
+                addBomb(this, ufo);
             }
-            if(isInside(ufo, this.rocket) || isBelow(ufo)){
+            if(isInside(ufo, this.rocket) || isBelowBottom(ufo)){
                 destroyGame(this);
             }
         });
@@ -49,7 +49,7 @@ define(['constants'], function(constants){
         this.bombs.forEach((bomb) => {
             bomb.move(position);
 
-            if(isBelow(bomb)){
+            if(isBelowBottom(bomb)){
                 removeBomb(this, bomb);
             }else if(isInside(bomb, this.rocket)){
                 destroyGame(this);
@@ -57,22 +57,46 @@ define(['constants'], function(constants){
         });
     }
 
+
+    Game.prototype.change = function(keys){
+        if(keys[constants.KEY_FIRE] && !this.bullet){
+            shoot(this);
+        }
+
+        if(keys[constants.KEY_LEFT]){
+            this.rocket.accelerateX(-0.1);
+        }else if(keys[constants.KEY_RIGHT]){
+            this.rocket.accelerateX(0.1);
+        }else{
+            this.rocket.accelerateX(0);
+        }
+
+        if(keys[constants.KEY_ACCELERATE]){
+            this.rocket.accelerateY(-0.1);
+        }else if(keys[constants.KEY_BREAK]){
+            this.rocket.accelerateY(0.1);
+        }else{
+            this.rocket.accelerateY(0);
+        }
+    }
     function destroyGame(self){
         self.view.explode(self.rocket);
         self.ufos.forEach((ufo) => self.view.explode(ufo));
         self.bullets.forEach((bullet) => self.view.explode(bullet));
         self.bombs.forEach((bomb) => self.view.explode(bomb));
         self.isRunning = false;
+        self.view.addTotalScore(self.score);
+        self.complete.dispatch(self.score);
     }
 
-    function checkBullet(self, bullet){
+    function checkIfBulletHit(self, bullet){
         let deadUfo = hitUfo(bullet, self.ufos);
         if(deadUfo >= 0){
             let ufo = self.ufos.splice(deadUfo, 1)[0];
             self.view.explode(ufo);
             self.view.removeChild(bullet);
 
-            setTimeout(self.addUfo.bind(self), 500);
+            setTimeout(()=>addUfo(self), 500);
             self.score++;
             setTimeout(function(){
                 this.view.addScore(ufo.x, ufo.y, this.score);
@@ -119,7 +143,7 @@ define(['constants'], function(constants){
         return bullet.y + bullet.height < 0;
     }
 
-    function isBelow(ufo){
+    function isBelowBottom(ufo){
         return ufo.y  >= constants.GAME_HEIGHT;
     }
 
@@ -130,44 +154,22 @@ define(['constants'], function(constants){
         && inside.x < outside.x + outside.width;
     }
 
-    Game.prototype.change = function(keys){
-        if(keys[constants.KEY_FIRE] && !this.bullet){
-            this.shoot();
-        }
-
-        if(keys[constants.KEY_LEFT]){
-            this.rocket.accelerateX(-0.1);
-        }else if(keys[constants.KEY_RIGHT]){
-            this.rocket.accelerateX(0.1);
-        }else{
-            this.rocket.accelerateX(0);
-        }
-
-        if(keys[constants.KEY_ACCELERATE]){
-            this.rocket.accelerateY(-0.1);
-        }else if(keys[constants.KEY_BREAK]){
-            this.rocket.accelerateY(0.1);
-        }else{
-            this.rocket.accelerateY(0);
-        }
-    }
-
-    Game.prototype.addUfo = function(){
-        let ufo = this.view.addUfo();
-        this.ufos.push(ufo);
+    function addUfo(self){
+        let ufo = self.view.addUfo();
+        self.ufos.push(ufo);
         return ufo;
     }
 
-    Game.prototype.addBomb = function(ufo){
-        if(!this.bombs.length && ufo.y < constants.GAME_HEIGHT/2){
-            let bomb = this.view.addBomb(ufo);
-            this.bombs.push(bomb);
+     function addBomb(self, ufo){
+        if(!self.bombs.length && ufo.y < constants.GAME_HEIGHT/2){
+            let bomb = self.view.addBomb(ufo);
+            self.bombs.push(bomb);
         }
     }
 
-    Game.prototype.shoot = function(){
-        let bullet = this.view.addBullet(this.rocket.x - 10, this.rocket.y);
-        this.bullets.push(bullet);
+    function shoot(self){
+        let bullet = self.view.addBullet();
+        self.bullets.push(bullet);
         return bullet;
     };
 

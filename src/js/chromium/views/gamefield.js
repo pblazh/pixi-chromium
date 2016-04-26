@@ -1,6 +1,6 @@
 define(
-    ['pixi', 'constants', 'tools', './bg', './rocket', './explosion', './bullet', './ufo', './bomb', './score'],
-    function(PX, constants, tools, BgView, RocketView, ExplosionView, BulletView, UfoView, BombView, ScoreView){
+    ['pixi', 'constants', 'tools', './bg', './rocket', './explosion', './bullet', './ufo', './bomb', './score', './totalscore'],
+    function(PX, constants, tools, BgView, RocketView, ExplosionView, BulletView, UfoView, BombView, ScoreView, TotalScoreView){
     'use strict';
 
     function Gamefield(){
@@ -36,15 +36,15 @@ define(
     Gamefield.prototype.addBomb = function(ufo){
         let bomb = new BombView();
         bomb.x = ufo.x;
-        bomb.y = ufo.y + ufo.height;
+        bomb.y = ufo.y + ufo.height / 2;
         this.addChild(bomb);
         return bomb;
     }
 
-    Gamefield.prototype.addBullet = function(x, y){
+    Gamefield.prototype.addBullet = function(){
         let bullet = new BulletView();
-        bullet.x = x;
-        bullet.y = y;
+        bullet.x = this.rocket.x - 8;
+        bullet.y = this.rocket.y  - 8;
         this.addChild(bullet);
         return bullet;
     }
@@ -56,6 +56,15 @@ define(
         this.addChild(scoreView);
         return scoreView;
     }
+
+    Gamefield.prototype.addTotalScore = function(score){
+        let scoreView = new TotalScoreView(score);
+        scoreView.x = constants.GAME_WIDTH / 2;
+        scoreView.y = constants.GAME_HEIGHT / 2;
+        this.addChild(scoreView);
+        return scoreView;
+    }
+
     Gamefield.prototype.explode = function(what){
         let explosion = new ExplosionView();
         explosion.x = what.x;

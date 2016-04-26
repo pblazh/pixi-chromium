@@ -1,5 +1,6 @@
-require(['tetris/main'], function (App) {
+require(['pixi', 'chromium/main'], function (PX, App) {
     'use strict';
     /* Just an entrance point */
-    var app = new App(document.getElementById('app'));
+    PX.loader.add('assets/sprites.json')
+            .load(() => new App(document.getElementById('app')));
 });
