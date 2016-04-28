@@ -1,0 +1,281 @@
+{
+	"meta": {
+		"image": "sprites.png",
+		"size": {"w":1188,"h":716},
+		"scale": "1"
+	},
+	"frames": {
+		"bg_over.png":
+		{
+			"frame": {"x":406,"y":2,"w":400,"h":351},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":400,"h":351},
+			"sourceSize": {"w":400,"h":351}
+		},
+		"bg_0.png":
+		{
+			"frame": {"x":2,"y":2,"w":400,"h":600},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":400,"h":600},
+			"sourceSize": {"w":400,"h":600}
+		},
+		"earth.png":
+		{
+			"frame": {"x":810,"y":2,"w":376,"h":378},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":376,"h":378},
+			"sourceSize": {"w":376,"h":378}
+		},
+		"planet_00.png":
+		{
+			"frame": {"x":810,"y":384,"w":178,"h":180},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":178,"h":180},
+			"sourceSize": {"w":178,"h":180}
+		},
+		"planet_01.png":
+		{
+			"frame": {"x":992,"y":384,"w":158,"h":158},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":158,"h":158},
+			"sourceSize": {"w":158,"h":158}
+		},
+		"rocket_02.png":
+		{
+			"frame": {"x":406,"y":357,"w":100,"h":143},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":143},
+			"sourceSize": {"w":100,"h":143}
+		},
+		"rocket_01.png":
+		{
+			"frame": {"x":510,"y":357,"w":100,"h":143},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":143},
+			"sourceSize": {"w":100,"h":143}
+		},
+		"rocket_00.png":
+		{
+			"frame": {"x":614,"y":357,"w":100,"h":143},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":143},
+			"sourceSize": {"w":100,"h":143}
+		},
+		"ufo_01.png":
+		{
+			"frame": {"x":406,"y":504,"w":110,"h":73},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":110,"h":73},
+			"sourceSize": {"w":110,"h":73}
+		},
+		"ufo_00.png":
+		{
+			"frame": {"x":520,"y":504,"w":110,"h":72},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":110,"h":72},
+			"sourceSize": {"w":110,"h":72}
+		},
+		"ufo_02.png":
+		{
+			"frame": {"x":634,"y":504,"w":110,"h":62},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":110,"h":62},
+			"sourceSize": {"w":110,"h":62}
+		},
+		"planet_02.png":
+		{
+			"frame": {"x":2,"y":606,"w":102,"h":108},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":102,"h":108},
+			"sourceSize": {"w":102,"h":108}
+		},
+		"explode_03.png":
+		{
+			"frame": {"x":108,"y":606,"w":100,"h":100},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+			"sourceSize": {"w":100,"h":100}
+		},
+		"explode_05.png":
+		{
+			"frame": {"x":212,"y":606,"w":100,"h":100},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+			"sourceSize": {"w":100,"h":100}
+		},
+		"explode_04.png":
+		{
+			"frame": {"x":316,"y":606,"w":100,"h":100},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+			"sourceSize": {"w":100,"h":100}
+		},
+		"explode_00.png":
+		{
+			"frame": {"x":420,"y":606,"w":100,"h":100},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+			"sourceSize": {"w":100,"h":100}
+		},
+		"explode_02.png":
+		{
+			"frame": {"x":524,"y":606,"w":100,"h":100},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+			"sourceSize": {"w":100,"h":100}
+		},
+		"ignition_02.png":
+		{
+			"frame": {"x":1173,"y":416,"w":12,"h":12},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+			"sourceSize": {"w":12,"h":12}
+		},
+		"shoot_03.png":
+		{
+			"frame": {"x":1154,"y":384,"w":15,"h":89},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":15,"h":89},
+			"sourceSize": {"w":15,"h":89}
+		},
+		"shoot_04.png":
+		{
+			"frame": {"x":718,"y":357,"w":15,"h":89},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":15,"h":89},
+			"sourceSize": {"w":15,"h":89}
+		},
+		"shoot_00.png":
+		{
+			"frame": {"x":737,"y":357,"w":15,"h":89},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":15,"h":89},
+			"sourceSize": {"w":15,"h":89}
+		},
+		"shoot_01.png":
+		{
+			"frame": {"x":756,"y":357,"w":15,"h":89},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":15,"h":89},
+			"sourceSize": {"w":15,"h":89}
+		},
+		"shoot_02.png":
+		{
+			"frame": {"x":775,"y":357,"w":15,"h":89},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":15,"h":89},
+			"sourceSize": {"w":15,"h":89}
+		},
+		"planet_03.png":
+		{
+			"frame": {"x":732,"y":606,"w":65,"h":71},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":65,"h":71},
+			"sourceSize": {"w":65,"h":71}
+		},
+		"fire_01.png":
+		{
+			"frame": {"x":801,"y":606,"w":38,"h":70},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":38,"h":70},
+			"sourceSize": {"w":38,"h":70}
+		},
+		"fire_03.png":
+		{
+			"frame": {"x":843,"y":606,"w":38,"h":70},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":38,"h":70},
+			"sourceSize": {"w":38,"h":70}
+		},
+		"fire_00.png":
+		{
+			"frame": {"x":885,"y":606,"w":38,"h":70},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":38,"h":70},
+			"sourceSize": {"w":38,"h":70}
+		},
+		"fire_02.png":
+		{
+			"frame": {"x":927,"y":606,"w":38,"h":70},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":38,"h":70},
+			"sourceSize": {"w":38,"h":70}
+		},
+		"fire_04.png":
+		{
+			"frame": {"x":969,"y":606,"w":38,"h":70},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":38,"h":70},
+			"sourceSize": {"w":38,"h":70}
+		},
+		"bomb.png":
+		{
+			"frame": {"x":748,"y":504,"w":44,"h":56},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":44,"h":56},
+			"sourceSize": {"w":44,"h":56}
+		},
+		"tie.png":
+		{
+			"frame": {"x":992,"y":546,"w":45,"h":12},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":45,"h":12},
+			"sourceSize": {"w":45,"h":12}
+		},
+		"ignition_01.png":
+		{
+			"frame": {"x":1173,"y":384,"w":12,"h":12},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+			"sourceSize": {"w":12,"h":12}
+		},
+		"ignition_00.png":
+		{
+			"frame": {"x":1173,"y":400,"w":12,"h":12},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+			"sourceSize": {"w":12,"h":12}
+		},
+		"explode_01.png":
+		{
+			"frame": {"x":628,"y":606,"w":100,"h":100},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+			"sourceSize": {"w":100,"h":100}
+		}
+	}
+}
